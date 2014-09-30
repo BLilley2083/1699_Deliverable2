@@ -84,4 +84,102 @@ public class ArrayListTest {
 		assertTrue(al3.get(0) != null);
 		assertTrue(al3.get(al3.size()-1) != null);
 	}
+	
+	// test to attempt to insert an int in an array of Strings
+	@Test
+	public void testAddIntFalse(){
+		fail();
+		//assertFalse(al.add(2));
+	}
+
+	// test to remove an element
+	@Test
+	public void testRemoveElement(){
+		al.add("hello");
+		al.add("there");
+		assertTrue(al.remove("there"));
+	}
+
+	// test to remove all elements
+	@Test
+	public void testRemoveAll(){
+		al.add("hello");
+		al.add("there");
+		assertTrue(al.removeAll(al));
+	}
+
+	// test to remove an element that does not exist
+	@Test
+	public void testRemoveBadElement(){
+		assertFalse(al.remove("beepbeepbeep"));
+	}
+
+	// test that two ArrayLists are the same
+	@Test
+	public void testSameArrayList(){
+		ArrayList<String> al2 = new ArrayList<String>();
+		ArrayList<String> al3 = new ArrayList<String>();
+		assertSame(al2, al3);
+	}
+
+	// test that two arrays are equal
+	@Test
+	public void testEqualALists(){
+		ArrayList<String> al2 = new ArrayList<String>();
+		ArrayList<String> al3 = new ArrayList<String>();
+		al2.add("fun");
+		al3.add("fun");
+		assertEquals(al2, al3);
+	}
+
+	// test that the array contains the element "dog"
+	@Test
+	public void testArrayContains(){
+		al.add("dog");
+		assertTrue(al.contains("dog"));
+	}
+
+	// test that the array does not contain "fog"
+	@Test
+	public void testArrayContainsFog(){
+		assertFalse(al.contains("fog"));
+	}
+
+	// fail test to see if the array contains the int, 100
+	@Test
+	public void testFailContains(){
+		fail();
+		al.contains(100);
+	}
+
+	// test to see if the array is empty.
+	// to be done immediately after testClearList()
+	@Test
+	public void testArrayEmpty(){
+		assertTrue(al.isEmpty());
+	}
+
+	// test false is array empty
+	@Test
+	public void testArrayEmptyFalse(){
+		al.add("cat");
+		assertFalse(al.isEmpty());
+	}
+
+	// test clear elements from list that is already empty
+	@Test
+	public void testClearEmptyArray(){
+		al.removeAll(al);
+		assertFalse(al.removeAll(al));
+	}
+	
+	//Fail test - we know adding integers to an ArrayList of
+	//strings is a no no
+	@Test
+	public void testFailure(){
+		fail();
+		for(int i = 0; i < 1000; i++){
+			//al.add(i);
+		}
+	}
 }
