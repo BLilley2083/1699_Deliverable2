@@ -1,19 +1,34 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
+import com.sun.corba.se.impl.orbutil.graph.Node;
 
 public class ArrayListTest {
 	@SuppressWarnings("unchecked")
 	
 	ArrayList<String> al = null;
 	
+	@SuppressWarnings("unchecked")
+	@Mock
+	HashMap<Integer, String> mockMap = Mockito.mock(HashMap.class);
+	
 	@Before
 	public void setUp() throws Exception{
 		al = new ArrayList<String>();
+		MockitoAnnotations.initMocks(mockMap);
 	}
 	
 	//since all was declared to be an empty ArrayList, it should not be null
@@ -89,7 +104,7 @@ public class ArrayListTest {
 	@Test
 	public void testAddIntFalse(){
 		fail();
-		//assertFalse(al.add(2));
+		assertFalse(al.add(2));
 	}
 
 	// test to remove an element
@@ -182,4 +197,67 @@ public class ArrayListTest {
 			//al.add(i);
 		}
 	}
+	
+	//Mock and Stub section
+	//Mocking an ArrayList may be very hard, so you told us
+	//we could mock another object to prove to you that we 
+	//understand the purpose of mocks
+
+	//Test putting mock nodes in a Hashmap works
+	@Test
+	public void testMockPut(){
+		HashMap<Node, Node> map = new HashMap<Node, Node>();
+		
+		Node mockString = Mockito.mock(Node.class);
+		Node mockInt = Mockito.mock(Node.class);
+		
+		map.put(mockInt, mockString);
+	}
+	
+	//test getting a mock value that is in the map works
+	@Test
+	public void testMockGet(){
+		HashMap<Node, Node> map = new HashMap<Node, Node>();
+		
+		Node mockKey = Mockito.mock(Node.class);
+		Node mockValue = Mockito.mock(Node.class);
+		
+		map.put(mockKey, mockValue);
+		map.get(mockKey);
+	}
+	
+	//test removing mock object
+	@Test
+	public void testMockRemove(){
+		HashMap<Node, Node> map = new HashMap<Node, Node>();
+		
+		Node mockKey = Mockito.mock(Node.class);
+		Node mockValue = Mockito.mock(Node.class);
+		
+		map.put(mockKey, mockValue);
+		map.remove(mockKey);
+	}
+	
+	/*@Test
+	public void testEmpty(){
+		HashMap<Node, Node> map = new HashMap<Node, Node>();
+	
+		boolean isEmpty(){
+			HashMap<Node, Node> map = new HashMap<Node, Node>();
+			return true;
+		}
+	}
+	
+	@Test
+	public boolean containsKey(Node key){
+		HashMap<Node, Node> map = new HashMap<Node, Node>();
+		return true;
+	}
+	
+	@Test
+	public boolean containsValue(Node value){
+		HashMap<Node, Node> map = new HashMap<Node, Node>();
+		return true;
+	}*/
+	
 }
