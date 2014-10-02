@@ -30,33 +30,30 @@ public class ArrayListTest {
 		MockitoAnnotations.initMocks(mockMap);
 	}
 	
-	// An ArrayList that has been declared and initialized should not be null
+	//1. The ArryaList was initialized to empty, so its contents should not be null.
 	@Test
 	public void testNotNull(){
 		assertNotNull(al);
 	}
 	
-	// An ArrayList that has been declared and initialized to null should be null
-	@Test
-	public void testNull(){
-		ArrayList<String> list = null;
-		assertNull(list);
-	}
-	
-	// An ArrayList should always equal itself
+	//2. An ArrayList should always equal itself
 	@Test
 	public void testEqualsItself(){
 		assertEquals(al, al);
 	}
 	
-	// Two empty ArrayLists should be equal
+	//3. Two empty ArrayLists should be equal.
+	//Create two empty ArrayLists.
+	//They should be equal to each other.
 	@Test
 	public void testEmptyEquals(){
 		ArrayList<String> al2 = new ArrayList<String>();
 		assertEquals(al, al2);
 	}
 	
-	// Two ArrayLists that had the same values added in the same order should be equal
+	//4. Two ArrayLists that had the same values added in the same order should be equal.
+	//Create two ArrayLists and initialize them with the same values
+	//The arrays should be equal;
 	@Test
 	public void testNonEmptyEquals(){
 		ArrayList<String> al2 = new ArrayList<String>();
@@ -69,21 +66,12 @@ public class ArrayListTest {
 		assertEquals(al, al2);
 	}
 	
-	// An ArrayList with x items should have a size of x items
+	//5. Two ArrayLists of different values should never be equal
+	//Create a second ArrayList and add values X, Y, and Z; these values 
+	//should not be the same as the values in the first ArrayList.
+	//The two ArrayLists should not be equal.
 	@Test
-	public void testSize(){
-		al = new ArrayList<String>();
-		
-		al.add("Brett");
-		al.add("Allison");
-		al.add("Scruffy");
-		
-		assertTrue(al.size() == 3);
-	}
-	
-	// Two ArrayLists of different sizes should never be equal
-	@Test
-	public void testDiffSizeNotEqual(){
+	public void testNotEqual(){
 		ArrayList<String> al2 = new ArrayList<String>();
 		
 		al2.add("1");
@@ -93,7 +81,9 @@ public class ArrayListTest {
 		assertFalse(al.equals(al2));
 	}
 	
-	// An ArrayList with items should have a length greater than 0
+	//6. An ArrayList with items should have a size greater than zero.
+	//Add at least one item to ArrayList al.
+	//The ArrayList size should be greater than zero.
 	@Test
 	public void testGreaterThanZero(){
 		al.add("Brett");
@@ -104,8 +94,9 @@ public class ArrayListTest {
 		assertTrue(al.size() > 0);
 	}
 	
-	// An ArrayList with items added should contain
-	// those items. Boundary values: First Item and Last Item
+	//7. An ArrayList with items X, Y, and Z added should contain
+	//items X, Y, and Z.
+	//This test checks the boundary values: First Item and Last Item
 	@Test
 	public void testNonEmptyExist(){
 		ArrayList<Integer> al3 = new ArrayList<Integer>();
@@ -118,35 +109,24 @@ public class ArrayListTest {
 		assertTrue(al3.get(al3.size()-1) != null);
 	}
 	
-	// test to attempt to insert an int in an array of Strings
-	// However, Java knows not to add an int to any arraylist of 
-	// strings, so it wouldn't have compiled. this is a fail case
+	//8. An ArryaList of type String should not accept an int type added to it.
+	//Use a try/catch block for this Fail() case test.
+	//This test should fail.
 	@Test
 	public void testAddIntToStringList(){
 	
 		try{
-			//assertFalse(al.add(2));
+			assertFalse(al.add(2));
 		}
 		catch(Exception e){
 			fail();
 		}
 	}
 	
-	// Test that the lastIndexOf method returns the correct index
-	// If x items are in the list, and the method is called
-	// on the xth item, then it should return x-1
-	@Test
-	public void testLastIndexOf(){
-		al = new ArrayList<String>();
-		
-		al.add("Philadelphia");
-		al.add("Pittsburgh");
-		al.add("Pennsylvania");
-		
-		assertTrue(al.lastIndexOf("Pennsylvania") == 2);
-	}
-
-	// test to remove an element
+	//9. When an element, X, exists in the ArrayList, it should be able to
+	// be removed.
+	//Add an element, X, to the ArrayList and then remove it.
+	//The element should be removed.
 	@Test
 	public void testRemoveElement(){
 		al.add("hello");
@@ -154,7 +134,9 @@ public class ArrayListTest {
 		assertTrue(al.remove("there"));
 	}
 
-	// test to remove all elements
+	//10. All of the elements in an ArrayList should be able to be removed at once.
+	//Add at least one item to the ArrayList and then removeAll elements.
+	//The ArrayList elements should all be removed.
 	@Test
 	public void testRemoveAll(){
 		al.add("hello");
@@ -162,21 +144,19 @@ public class ArrayListTest {
 		assertTrue(al.removeAll(al));
 	}
 
-	// test to remove an element that does not exist
+	//11. An element that does not exist in the ArrayList should not be able 
+	// to be removed.
+	//Try to remove a unique element from the ArrayList that you know for
+	// certain does not exist in the array.
+	//The element should not be able to be removed.
 	@Test
 	public void testRemoveBadElement(){
 		assertFalse(al.remove("beepbeepbeep"));
 	}
 
-	// Two arraylists that refer to the same object (arraylist) should be the same
-	@Test
-	public void testSameArrayList(){
-		ArrayList<String> al2 = new ArrayList<String>();
-		ArrayList<String> al3 = al2;
-		assertSame(al2, al3);
-	}
-
-	// Two arraylists that refer to the same object (arraylist) should be the same
+	//12. Two ArrayLists should refer to the same ArrayList.
+	//Create two ArrayLists.
+	//Both ArrayLists should be the same.
 	@Test
 	public void testNotSameArrayList(){
 		ArrayList<String> al2 = new ArrayList<String>();
@@ -184,7 +164,9 @@ public class ArrayListTest {
 		assertNotSame(al2, al3);
 	}
 	
-	// test that two arrays containing the same items should be equal
+	//13. Two ArrayLists initialized to the same values should be equal.
+	//Create two arrays and add the same value to each of them.
+	//The ArrayLists should be equal to each other.
 	@Test
 	public void testEqualALists(){
 		ArrayList<String> al2 = new ArrayList<String>();
@@ -194,26 +176,34 @@ public class ArrayListTest {
 		assertEquals(al2, al3);
 	}
 
-	//
+	//14. An array with element X added to it should return the element X.
+	//Add an element, X, to the array.
+	//The element should contain element X.
 	@Test
 	public void testArrayContains(){
 		al.add("dog");
 		assertTrue(al.contains("dog"));
 	}
 
-	// test that the array does not contain "fog"
+	//15. An ArrayList that does not contain an element, X, should return that
+	// it does contain X. 
+	//Ensure that an element is not in the ArrayList, and try to see if the 
+	// ArrayList contains the element.
+	//The ArrayList should not contain the element X since it does not exist in the
+	// array.
 	@Test
 	public void testArrayContainsFog(){
 		assertFalse(al.contains("fog"));
 	}
 
-	// An arraylist of strings should not contain an int (100)
-	// this should fail
+	//16. An ArryaList of type String should not contain any elements of type int.
+	//Use a try/catch block for this Fail() case test.
+	//This test should fail.
 	@Test
 	public void testFailContains(){
 		//al = new ArrayList<String>();
 		try{
-			al.contains(100);
+			assertTrue(al.contains(100));
 		} 
 		catch(Exception e){
 			fail();
@@ -221,23 +211,30 @@ public class ArrayListTest {
 		
 	}
 
-	// An arraylist that has been cleared should be empty
-	// It should return true when isEmpty() is called
+	//17. An array that is cleared should be empty.
+	//Clear the ArrayList.
+	//The ArrayList should be empty.
 	@Test
 	public void testArrayEmpty(){
 		al.clear();
 		assertTrue(al.isEmpty());
 	}
 
-	// An arraylist that has an object should not be empty
-	// It should return false when isEmpty() is called
+	//18. An ArryaList with at least one element should not be empty.
+	//Add at least one element to the ArrayList.
+	//The ArrayList should not be empty.
 	@Test
 	public void testArrayEmptyFalse(){
 		al.add("cat");
 		assertFalse(al.isEmpty());
 	}
 
-	// test clear elements from list that is already empty
+	//19. An ArrayList that is empty should not be able to have all of its
+	// elements removed.
+	//Remove all of the elements from an ArrayList that contains no
+	// elements.
+	//The "elements" should not be able to be removed, since there are no
+	// elements in the ArrayList.
 	@Test
 	public void testClearEmptyArray(){
 		al.removeAll(al);
@@ -249,7 +246,7 @@ public class ArrayListTest {
 	// we could mock another object to prove to you that we 
 	// understand the purpose of mocks
 
-	// Test putting mock nodes in a Hashmap works
+	//20. Test putting mock nodes in a Hashmap works
 	@Test
 	public void testMockPut(){
 		HashMap<Node, Node> map = new HashMap<Node, Node>();
@@ -260,7 +257,7 @@ public class ArrayListTest {
 		map.put(mockInt, mockString);
 	}
 	
-	// test getting a mock value that is in the map works
+	//20. test getting a mock value that is in the map works
 	@Test
 	public void testMockGet(){
 		HashMap<Node, Node> map = new HashMap<Node, Node>();
@@ -272,7 +269,7 @@ public class ArrayListTest {
 		map.get(mockKey);
 	}
 	
-	// test removing mock object
+	//22. test removing mock object
 	@Test
 	public void testMockRemove(){
 		HashMap<Node, Node> map = new HashMap<Node, Node>();
@@ -286,7 +283,8 @@ public class ArrayListTest {
 	
 	// Stubbing the HashMap method isEmpty
 	// We're using the Mockito testing framework to do so
-	// We know that an empty Hashmap will return true when isEmpty() is
+	
+	//23. We know that an empty Hashmap will return true when isEmpty() is
 	// called ... so we're returning true automatically for this empty
 	// mock HashMap
 	@Test
@@ -296,7 +294,7 @@ public class ArrayListTest {
 		Mockito.when(map.isEmpty()).thenReturn(true);
 	}
 	
-	// A mock HashMap that had a key-value pair put in it
+	//24. A mock HashMap that had a key-value pair put in it
 	// will contain that key
 	@Test
 	public void testContainsKey(){
@@ -309,7 +307,7 @@ public class ArrayListTest {
 		Mockito.when(map.containsKey(mockKey)).thenReturn(true);
 	}
 	
-	// A mock HashMap that had a key-value pair put in it
+	//25. A mock HashMap that had a key-value pair put in it
 	// will contain that value
 	@Test
 	public void testContainsValue(){
@@ -322,12 +320,53 @@ public class ArrayListTest {
 		Mockito.when(map.containsValue(mockValue)).thenReturn(true);
 	}
 	
-	// An empty mock HashMap should have a size of 0
+	//26. An empty mock HashMap should have a size of 0
 	@Test
 	public void testMapSize(){
 		HashMap<Node, Node> map = Mockito.mock(HashMap.class);
 		
 		Mockito.when(map.size()).thenReturn(0);
+	}
+	
+	//27. An ArrayList with x items should have a size of x items
+	@Test
+	public void testSize(){
+		al = new ArrayList<String>();
+		
+		al.add("Brett");
+		al.add("Allison");
+		al.add("Scruffy");
+		
+		assertTrue(al.size() == 3);
+	}
+	
+	//28. Test that the lastIndexOf method returns the correct index
+	// If x items are in the list, and the method is called
+	// on the xth item, then it should return x-1
+	@Test
+	public void testLastIndexOf(){
+		al = new ArrayList<String>();
+		
+		al.add("Philadelphia");
+		al.add("Pittsburgh");
+		al.add("Pennsylvania");
+		
+		assertTrue(al.lastIndexOf("Pennsylvania") == 2);
+	}
+
+	//29. Two arraylists that refer to the same object (arraylist) should be the same
+	@Test
+	public void testSameArrayList(){
+		ArrayList<String> al2 = new ArrayList<String>();
+		ArrayList<String> al3 = al2;
+		assertSame(al2, al3);
+	}
+	
+	//30. An ArrayList that has been declared and initialized to null should be null
+	@Test
+	public void testNull(){
+		ArrayList<String> list = null;
+		assertNull(list);
 	}
 	
 }
