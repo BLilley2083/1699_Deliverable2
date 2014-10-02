@@ -101,10 +101,12 @@ public class ArrayListTest {
 	}
 	
 	// test to attempt to insert an int in an array of Strings
+	// However, Java knows not to add an int to any arraylist of 
+	// strings, so it wouldn't have compiled. this is a fail case
 	@Test
-	public void testAddIntFalse(){
+	public void testAddIntToStringList(){
 		fail();
-		assertFalse(al.add(2));
+		//assertFalse(al.add(2));
 	}
 
 	// test to remove an element
@@ -188,15 +190,7 @@ public class ArrayListTest {
 		assertFalse(al.removeAll(al));
 	}
 	
-	//Fail test - we know adding integers to an ArrayList of
-	//strings is a no no
-	@Test
-	public void testFailure(){
-		fail();
-		for(int i = 0; i < 1000; i++){
-			//al.add(i);
-		}
-	}
+	
 	
 	//Mock and Stub section
 	//Mocking an ArrayList may be very hard, so you told us
@@ -238,17 +232,14 @@ public class ArrayListTest {
 		map.remove(mockKey);
 	}
 	
-	/*@Test
+	@Test
 	public void testEmpty(){
-		HashMap<Node, Node> map = new HashMap<Node, Node>();
+		HashMap<Node, Node> map = Mockito.mock(HashMap.class);
 	
-		boolean isEmpty(){
-			HashMap<Node, Node> map = new HashMap<Node, Node>();
-			return true;
-		}
+		Mockito.when(map.isEmpty()).thenReturn(true);
 	}
 	
-	@Test
+	/*@Test
 	public boolean containsKey(Node key){
 		HashMap<Node, Node> map = new HashMap<Node, Node>();
 		return true;
